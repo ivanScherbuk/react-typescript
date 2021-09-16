@@ -2,12 +2,15 @@ export interface UserState {
   users: any[],
   loading: boolean;
   error: null | string;
+  page: number;
+  limit: number;
 }
 
 export enum UserActionTypes {
   FETCH_USERS = 'FETCH_USERS',
   FETCH_USERS_SUCCESS = 'FETCH_USERS_SUCCESS',
   FETCH_USERS_ERROR = 'FETCH_USERS_ERROR',
+  SET_USERS_PAGE = 'SET_USERS_PAGE',
 }
 
 interface FetchUsersAction {
@@ -24,4 +27,9 @@ interface FetchUsersErrorAction {
   payload: string;
 }
 
-export type UserAction = FetchUsersAction | FetchUsersSuccessAction | FetchUsersErrorAction;
+interface SetUsersPageAction {
+  type: UserActionTypes.SET_USERS_PAGE;
+  payload: number;
+}
+
+export type UserAction = FetchUsersAction | FetchUsersSuccessAction | FetchUsersErrorAction | SetUsersPageAction;
