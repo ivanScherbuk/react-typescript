@@ -1,7 +1,7 @@
-import * as UserActionCreators from './user';
+import * as EmployeeActionCreators from './employee';
 import * as DepartmentActionCreators from './department';
 
 export default {
-  ...UserActionCreators,
+  ...EmployeeActionCreators,
   ...DepartmentActionCreators,
 }

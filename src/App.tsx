@@ -1,12 +1,10 @@
 import React from 'react';
-import DepartmentList from './components/DepartmentList';
-import UserList from './components/UserList';
+import EmployeeList from './components/EmployeeList';
 
 const App = () => {
   return (
     <div>
-      <UserList />
-      <DepartmentList />
+      <EmployeeList />
     </div>
   );
 }
