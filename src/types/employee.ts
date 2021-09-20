@@ -1,5 +1,15 @@
+export interface IEmployee {
+  id: string,
+  firstName: string;
+  lastName: string;
+  company: string;
+  department: string;
+  position: string;
+  createdAt: string;
+}
+
 export interface EmployeeState {
-  employees: any[],
+  employees: IEmployee[];
   loading: boolean;
   error: null | string;
   page: number;
@@ -7,7 +17,7 @@ export interface EmployeeState {
 }
 
 export interface Employee {
-  firstName: string,
+  firstName: string;
   lastName: string;
   company: string;
   department: string;
@@ -27,7 +37,7 @@ interface FetchEmployeesAction {
 
 interface FetchEmployeesSuccessAction {
   type: EmployeeActionTypes.FETCH_EMPLOYEES_SUCCESS;
-  payload: any[];
+  payload: IEmployee[];
 }
 
 interface FetchEmployeesErrorAction {

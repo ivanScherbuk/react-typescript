@@ -1,5 +1,5 @@
 export interface DepartmentState {
-  departments: any[],
+  departments: any[];
   loading: boolean;
   error: null | string;
 }

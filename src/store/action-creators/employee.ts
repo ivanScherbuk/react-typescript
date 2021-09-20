@@ -1,4 +1,4 @@
-import { Employee, EmployeeAction, EmployeeActionTypes } from '../../types/employee';
+import { Employee, EmployeeAction, EmployeeActionTypes, IEmployee } from '../../types/employee';
 import axios from "axios";
 import { Dispatch } from "redux";
 
@@ -6,7 +6,7 @@ export const fetchEmployees = (page = 1, limit = 10) => {
   return async (dispatch: Dispatch<EmployeeAction>) => {
     try {
       dispatch({ type: EmployeeActionTypes.FETCH_EMPLOYEES });
-      const response = await axios.get(`http://localhost:5000/employees?limit=${limit}&page=${page}`);
+      const response = await axios.get<IEmployee[]>(`http://localhost:5000/employees?limit=${limit}&page=${page}`);
       dispatch({ type: EmployeeActionTypes.FETCH_EMPLOYEES_SUCCESS, payload: response.data });
     } catch (error) {
       dispatch({
@@ -17,7 +17,7 @@ export const fetchEmployees = (page = 1, limit = 10) => {
   }
 }
 
-export const deleteEmployee = (id: string) => { 
+export const deleteEmployeeAC = (id: string) => { 
   return async (dispatch: Dispatch<EmployeeAction>) => {
     try {
       dispatch({ type: EmployeeActionTypes.FETCH_EMPLOYEES });
@@ -38,7 +38,7 @@ export const addEmployee = (user: Employee) => {
       dispatch({ type: EmployeeActionTypes.FETCH_EMPLOYEES });
       const response = await axios({
         method: 'post',
-        url: '`http://localhost:5000/employees`',
+        url: 'http://localhost:5000/employees',
         data: user,
       });
       dispatch({ type: EmployeeActionTypes.FETCH_EMPLOYEES_SUCCESS, payload: response.data });
