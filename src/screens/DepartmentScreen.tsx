@@ -1,9 +1,9 @@
-import React, { useEffect } from 'react'
+import React, { useEffect } from 'react';
 import { useActions } from '../hooks/useActions';
 import { useTypedSelector } from '../hooks/useTypedSelector';
 
 
-const DepartmentList: React.FC = () => {
+const DepartmentScreen: React.FC = () => {
   const { departments, error, loading } = useTypedSelector(state => state.department);
   const { fetchDepartments } = useActions();
 
@@ -28,4 +28,4 @@ const DepartmentList: React.FC = () => {
   )
 }
 
-export default DepartmentList;
+export default DepartmentScreen;

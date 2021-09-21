@@ -1,11 +1,13 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react';
 import { useActions } from '../hooks/useActions';
 import { useTypedSelector } from '../hooks/useTypedSelector';
-import EmployeeTable from './EmployeeTable';
+import EmployeeTable from '../components/EmployeeTable';
+import ModalInput from '../components/ModalInput';
 
-const EmployeeList: React.FC = () => {
+const EmployeeScreen: React.FC = () => {
   const { employees, error, loading, page, limit } = useTypedSelector(state => state.employee);
   const { fetchEmployees, deleteEmployeeAC, addEmployee } = useActions();
+  const [ isShowModal, setIsShowModal ] = useState<boolean>(false);
 
   useEffect(() => {
     fetchEmployees(page, limit);
@@ -29,11 +31,14 @@ const EmployeeList: React.FC = () => {
         employees={employees}
         deleteEmployee={deleteEmployee}
       />
-      <button>
+      {isShowModal &&
+        <ModalInput closeModal={() => setIsShowModal(false)} />
+      }
+      <button onClick={() => setIsShowModal(true)}>
         Add Employee
       </button>
     </div>
   )
 }
 
-export default EmployeeList;
+export default EmployeeScreen;
