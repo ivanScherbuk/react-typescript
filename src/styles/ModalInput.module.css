@@ -7,11 +7,16 @@
 }
 
 .card {
+  align-items: center;
   background-color: #FFFFFF;
   border-radius: 10px;
+  display: flex;
+  flex-direction: column;
   height: 500px;
   position: relative;
-  margin: 0 auto;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   width: 500px;
   z-index: 1000;
 }
@@ -24,4 +29,12 @@
   top: 0px;
   width: 100%;
   z-index: 100;
+}
+
+.property {
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 65%;
 }

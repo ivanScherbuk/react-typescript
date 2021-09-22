@@ -32,7 +32,7 @@ export const deleteEmployeeAC = (id: string) => {
   }
 }
 
-export const addEmployee = (user: Employee) => { 
+export const addEmployeeAC = (user: Employee) => { 
   return async (dispatch: Dispatch<EmployeeAction>) => {
     try {
       dispatch({ type: EmployeeActionTypes.FETCH_EMPLOYEES });
