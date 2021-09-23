@@ -8,16 +8,16 @@
 
 .card {
   align-items: center;
-  background-color: #FFFFFF;
+  background-color: white;
   border-radius: 10px;
   display: flex;
   flex-direction: column;
-  height: 500px;
+  padding: 24px;
   position: relative;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 500px;
+  width: 400px;
   z-index: 1000;
 }
 
@@ -36,5 +36,34 @@
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  width: 65%;
+  width: 80%;
+}
+
+.propertyField {
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  outline: none;
+  border-color: black;
+}
+
+.propertyField:focus {
+  border-color: gray;
+}
+
+.propertyText {
+  color: black;
+}
+
+.button {
+  cursor: pointer;
+  border: none;
+  width: 150px;
+  height: 40px;
+  border-radius: 10px;
+  background-color: black;
+  color:white;
+  font-weight: 700;
+  font-size: 14px;
+  margin-top: 20px;
 }

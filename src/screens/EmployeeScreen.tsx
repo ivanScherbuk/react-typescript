@@ -19,7 +19,12 @@ const EmployeeScreen: React.FC = () => {
   }
 
   const addEmployee = (employee: Employee) => {
-    addEmployeeAC(employee);
+    const emptyFields = Object.values(employee).filter((item) => !item.length);
+    if (emptyFields.length) {
+      alert('Please, fill in all fields!');
+    } else {
+      addEmployeeAC(employee);
+    }
   }
 
   if (loading) {

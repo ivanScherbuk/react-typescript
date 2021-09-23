@@ -26,19 +26,6 @@ const ModalInput: React.FC<ModalInputProps> = ({ closeModal, addEmployee }) => {
     <div className={styles.container}>
       <div className={styles.overlay} onClick={closeModal} />
       <div className={styles.card}>
-        {employeeData.map((item: string, index) => (
-          <div key={index} className={styles.property}>
-            <p className={styles.propertyText}>
-              {item}
-            </p>
-            <input
-              className={styles.propertyField}
-              value={employee[item]}
-              onChange={(e) => changeEmployeeData(e, item)}
-              type="text"
-            />
-          </div>
-        ))}
         <div className={styles.property}>
           <p className={styles.propertyText}>
             First Name
@@ -56,7 +43,7 @@ const ModalInput: React.FC<ModalInputProps> = ({ closeModal, addEmployee }) => {
           </p>
           <input
             className={styles.propertyField}
-            value={employee.firstName}
+            value={employee.lastName}
             onChange={(e) => changeEmployeeData(e, 'lastName')}
             type="text"
           />
@@ -67,7 +54,7 @@ const ModalInput: React.FC<ModalInputProps> = ({ closeModal, addEmployee }) => {
           </p>
           <input
             className={styles.propertyField}
-            value={employee.firstName}
+            value={employee.company}
             onChange={(e) => changeEmployeeData(e, 'company')}
             type="text"
           />
@@ -78,7 +65,7 @@ const ModalInput: React.FC<ModalInputProps> = ({ closeModal, addEmployee }) => {
           </p>
           <input
             className={styles.propertyField}
-            value={employee.firstName}
+            value={employee.department}
             onChange={(e) => changeEmployeeData(e, 'department')}
             type="text"
           />
@@ -89,12 +76,12 @@ const ModalInput: React.FC<ModalInputProps> = ({ closeModal, addEmployee }) => {
           </p>
           <input
             className={styles.propertyField}
-            value={employee.firstName}
+            value={employee.position}
             onChange={(e) => changeEmployeeData(e, 'position')}
             type="text"
           />
         </div>
-        <button onClick={() => addEmployee(employee)}>
+        <button className={styles.button} onClick={() => addEmployee(employee)}>
           Add Employee
         </button>
       </div>

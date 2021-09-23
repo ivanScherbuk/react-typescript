@@ -25,14 +25,25 @@ export interface Employee {
 }
 
 export enum EmployeeActionTypes {
-  FETCH_EMPLOYEES = 'FETCH_EMPLOYEES',
+  SET_LOADING = 'SET_LOADING',
+  REMOVE_LOADING = 'REMOVE_LOADING',
+  ADD_EMPLOYEE = 'ADD_EMPLOYEE',
   FETCH_EMPLOYEES_SUCCESS = 'FETCH_EMPLOYEES_SUCCESS',
   FETCH_EMPLOYEES_ERROR = 'FETCH_EMPLOYEES_ERROR',
   SET_EMPLOYEES_PAGE = 'SET_EMPLOYEES_PAGE',
 }
 
-interface FetchEmployeesAction {
-  type: EmployeeActionTypes.FETCH_EMPLOYEES;
+interface SetLoadingAction {
+  type: EmployeeActionTypes.SET_LOADING;
+}
+
+interface RemoveLoadingAction {
+  type: EmployeeActionTypes.REMOVE_LOADING;
+}
+
+interface AddEmployeeAction {
+  type: EmployeeActionTypes.ADD_EMPLOYEE;
+  payload: IEmployee;
 }
 
 interface FetchEmployeesSuccessAction {
@@ -50,4 +61,4 @@ interface SetEmployeesPageAction {
   payload: number;
 }
 
-export type EmployeeAction = FetchEmployeesAction | FetchEmployeesSuccessAction | FetchEmployeesErrorAction | SetEmployeesPageAction;
+export type EmployeeAction = SetLoadingAction | RemoveLoadingAction | AddEmployeeAction | FetchEmployeesSuccessAction | FetchEmployeesErrorAction | SetEmployeesPageAction;

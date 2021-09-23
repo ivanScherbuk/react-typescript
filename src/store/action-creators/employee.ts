@@ -5,9 +5,10 @@ import { Dispatch } from "redux";
 export const fetchEmployees = (page = 1, limit = 10) => { 
   return async (dispatch: Dispatch<EmployeeAction>) => {
     try {
-      dispatch({ type: EmployeeActionTypes.FETCH_EMPLOYEES });
+      dispatch({ type: EmployeeActionTypes.SET_LOADING });
       const response = await axios.get<IEmployee[]>(`http://localhost:5000/employees?limit=${limit}&page=${page}`);
       dispatch({ type: EmployeeActionTypes.FETCH_EMPLOYEES_SUCCESS, payload: response.data });
+      console.log(response.data);
     } catch (error) {
       dispatch({
         type: EmployeeActionTypes.FETCH_EMPLOYEES_ERROR,
@@ -20,7 +21,7 @@ export const fetchEmployees = (page = 1, limit = 10) => {
 export const deleteEmployeeAC = (id: string) => { 
   return async (dispatch: Dispatch<EmployeeAction>) => {
     try {
-      dispatch({ type: EmployeeActionTypes.FETCH_EMPLOYEES });
+      dispatch({ type: EmployeeActionTypes.SET_LOADING });
       const response = await axios.delete(`http://localhost:5000/employees/${id}`);
       dispatch({ type: EmployeeActionTypes.FETCH_EMPLOYEES_SUCCESS, payload: response.data });
     } catch (error) {
@@ -32,16 +33,17 @@ export const deleteEmployeeAC = (id: string) => {
   }
 }
 
-export const addEmployeeAC = (user: Employee) => { 
+export const addEmployeeAC = (employee: Employee) => { 
   return async (dispatch: Dispatch<EmployeeAction>) => {
     try {
-      dispatch({ type: EmployeeActionTypes.FETCH_EMPLOYEES });
+      dispatch({ type: EmployeeActionTypes.SET_LOADING });
       const response = await axios({
         method: 'post',
         url: 'http://localhost:5000/employees',
-        data: user,
+        data: employee,
       });
-      dispatch({ type: EmployeeActionTypes.FETCH_EMPLOYEES_SUCCESS, payload: response.data });
+      dispatch({ type: EmployeeActionTypes.ADD_EMPLOYEE, payload: response.data });
+      fetchEmployees();
     } catch (error) {
       dispatch({
         type: EmployeeActionTypes.FETCH_EMPLOYEES_ERROR,

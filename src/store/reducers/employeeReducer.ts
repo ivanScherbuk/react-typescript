@@ -10,8 +10,12 @@ const initialState: EmployeeState = {
 
 export const employeeReducer = (state = initialState, action: EmployeeAction): EmployeeState => {
   switch (action.type) {
-    case EmployeeActionTypes.FETCH_EMPLOYEES: 
+    case EmployeeActionTypes.SET_LOADING: 
       return { ...state, loading: true};
+    case EmployeeActionTypes.REMOVE_LOADING: 
+      return { ...state, loading: false };
+    case EmployeeActionTypes.ADD_EMPLOYEE: 
+      return { ...state, loading: false, employees: state.employees.length < state.limit ? [...state.employees, action.payload] : state.employees };
     case EmployeeActionTypes.FETCH_EMPLOYEES_SUCCESS: 
       return { ...state, loading: false, employees: action.payload };
     case EmployeeActionTypes.FETCH_EMPLOYEES_ERROR: 
