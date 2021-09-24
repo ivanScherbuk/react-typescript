@@ -14,6 +14,7 @@ export interface EmployeeState {
   error: null | string;
   page: number;
   limit: number;
+  employeesNumber: number;
 }
 
 export interface Employee {
@@ -28,6 +29,7 @@ export enum EmployeeActionTypes {
   SET_LOADING = 'SET_LOADING',
   REMOVE_LOADING = 'REMOVE_LOADING',
   ADD_EMPLOYEE = 'ADD_EMPLOYEE',
+  SET_EMPLOYEES_NUMBER = 'SET_EMPLOYEES_NUMBER',
   FETCH_EMPLOYEES_SUCCESS = 'FETCH_EMPLOYEES_SUCCESS',
   FETCH_EMPLOYEES_ERROR = 'FETCH_EMPLOYEES_ERROR',
   SET_EMPLOYEES_PAGE = 'SET_EMPLOYEES_PAGE',
@@ -46,6 +48,11 @@ interface AddEmployeeAction {
   payload: IEmployee;
 }
 
+interface SetEmployeesNumber {
+  type: EmployeeActionTypes.SET_EMPLOYEES_NUMBER;
+  payload: number;
+}
+
 interface FetchEmployeesSuccessAction {
   type: EmployeeActionTypes.FETCH_EMPLOYEES_SUCCESS;
   payload: IEmployee[];
@@ -61,4 +68,4 @@ interface SetEmployeesPageAction {
   payload: number;
 }
 
-export type EmployeeAction = SetLoadingAction | RemoveLoadingAction | AddEmployeeAction | FetchEmployeesSuccessAction | FetchEmployeesErrorAction | SetEmployeesPageAction;
+export type EmployeeAction = SetLoadingAction | RemoveLoadingAction | AddEmployeeAction | SetEmployeesNumber | FetchEmployeesSuccessAction | FetchEmployeesErrorAction | SetEmployeesPageAction;

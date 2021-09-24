@@ -2,8 +2,6 @@ import React, { useState } from 'react';
 import styles from '../styles/ModalInput.module.css';
 import { Employee } from '../types/employee';
 
-const employeeData: Array<string> = ['firstName', 'lastName', 'company', 'department', 'position'];
-
 interface ModalInputProps {
   closeModal: () => void,
   addEmployee: (employee: Employee) => void,

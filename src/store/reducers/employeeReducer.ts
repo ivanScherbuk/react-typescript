@@ -6,6 +6,7 @@ const initialState: EmployeeState = {
   error: null,
   page: 1,
   limit: 10,
+  employeesNumber: 0,
 }
 
 export const employeeReducer = (state = initialState, action: EmployeeAction): EmployeeState => {
@@ -16,6 +17,8 @@ export const employeeReducer = (state = initialState, action: EmployeeAction): E
       return { ...state, loading: false };
     case EmployeeActionTypes.ADD_EMPLOYEE: 
       return { ...state, loading: false, employees: state.employees.length < state.limit ? [...state.employees, action.payload] : state.employees };
+    case EmployeeActionTypes.SET_EMPLOYEES_NUMBER: 
+      return { ...state, loading: false, employeesNumber: action.payload };
     case EmployeeActionTypes.FETCH_EMPLOYEES_SUCCESS: 
       return { ...state, loading: false, employees: action.payload };
     case EmployeeActionTypes.FETCH_EMPLOYEES_ERROR: 
