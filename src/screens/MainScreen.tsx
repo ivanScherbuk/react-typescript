@@ -4,7 +4,7 @@ import { NavLink } from 'react-router-dom';
 const MainScreen: React.FC = () => {
   return (
     <div>
-      <NavLink to='/employees'>
+      <NavLink to='/employees/1'>
         Employees
       </NavLink>
       <NavLink to='/departments'>

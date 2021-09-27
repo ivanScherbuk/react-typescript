@@ -8,7 +8,7 @@ const App = () => {
   return (
     <BrowserRouter>
       <Switch>
-        <Route path={'/employees'}>
+        <Route path={'/employees/:page'}>
           <EmployeeScreen />
         </Route>
         <Route path={'/departments'}>

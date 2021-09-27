@@ -12,7 +12,7 @@ export interface EmployeeState {
   employees: IEmployee[];
   loading: boolean;
   error: null | string;
-  page: number;
+  employeesPage: number;
   limit: number;
   employeesNumber: number;
 }
@@ -23,6 +23,10 @@ export interface Employee {
   company: string;
   department: string;
   position: string;
+}
+
+export interface EmployeeParams {
+  page: string;
 }
 
 export enum EmployeeActionTypes {

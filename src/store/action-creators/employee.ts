@@ -2,7 +2,7 @@ import { Employee, EmployeeAction, EmployeeActionTypes, IEmployee } from '../../
 import axios from "axios";
 import { Dispatch } from "redux";
 
-export const fetchEmployees = (page = 1, limit = 10) => { 
+export const fetchEmployees = (page: number, limit: number) => { 
   return async (dispatch: Dispatch<EmployeeAction>) => {
     try {
       dispatch({ type: EmployeeActionTypes.SET_LOADING });
@@ -32,12 +32,12 @@ export const getEmployeesNumber = () => {
   }
 }
 
-export const deleteEmployeeAC = (id: string) => { 
+export const deleteEmployeeAC = (id: string, page: number, limit: number) => { 
   return async (dispatch: Dispatch<EmployeeAction>) => {
     try {
       dispatch({ type: EmployeeActionTypes.SET_LOADING });
-      const response = await axios.delete(`http://localhost:5000/employees/${id}`);
-      dispatch({ type: EmployeeActionTypes.FETCH_EMPLOYEES_SUCCESS, payload: response.data });
+      await axios.delete(`http://localhost:5000/employees/${id}`);
+      dispatch({ type: EmployeeActionTypes.REMOVE_LOADING });
     } catch (error) {
       dispatch({
         type: EmployeeActionTypes.FETCH_EMPLOYEES_ERROR,
@@ -57,7 +57,6 @@ export const addEmployeeAC = (employee: Employee) => {
         data: employee,
       });
       dispatch({ type: EmployeeActionTypes.ADD_EMPLOYEE, payload: response.data });
-      fetchEmployees();
     } catch (error) {
       dispatch({
         type: EmployeeActionTypes.FETCH_EMPLOYEES_ERROR,

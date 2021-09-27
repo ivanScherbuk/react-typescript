@@ -4,7 +4,7 @@ const initialState: EmployeeState = {
   employees: [],
   loading: false,
   error: null,
-  page: 1,
+  employeesPage: 1,
   limit: 10,
   employeesNumber: 0,
 }
@@ -24,7 +24,7 @@ export const employeeReducer = (state = initialState, action: EmployeeAction): E
     case EmployeeActionTypes.FETCH_EMPLOYEES_ERROR: 
       return { ...state, loading: false, error: action.payload };
     case EmployeeActionTypes.SET_EMPLOYEES_PAGE: 
-      return { ...state, page: action.payload };
+      return { ...state, employeesPage: action.payload };
     default: 
       return state;
   }
