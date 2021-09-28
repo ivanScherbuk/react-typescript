@@ -51,12 +51,12 @@ export const addEmployeeAC = (employee: Employee) => {
   return async (dispatch: Dispatch<EmployeeAction>) => {
     try {
       dispatch({ type: EmployeeActionTypes.SET_LOADING });
-      const response = await axios({
+      await axios({
         method: 'post',
         url: 'http://localhost:5000/employees',
         data: employee,
       });
-      dispatch({ type: EmployeeActionTypes.ADD_EMPLOYEE, payload: response.data });
+      dispatch({ type: EmployeeActionTypes.REMOVE_LOADING });
     } catch (error) {
       dispatch({
         type: EmployeeActionTypes.FETCH_EMPLOYEES_ERROR,

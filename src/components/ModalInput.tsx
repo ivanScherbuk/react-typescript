@@ -80,7 +80,7 @@ const ModalInput: React.FC<ModalInputProps> = ({ closeModal, addEmployee }) => {
           />
         </div>
         <button className={styles.button} onClick={() => addEmployee(employee)}>
-          Add Employee
+          Confirm
         </button>
       </div>
     </div>

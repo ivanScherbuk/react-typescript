@@ -11,20 +11,28 @@ interface PaginationProps {
 const Pagination: React.FC<PaginationProps> = ({ page, limit, maxPage, setPage }) => {
   return (
     <div className={styles.container}>
-      <button onClick={() => setPage(-page + 1)}>
-        {'<<'}
+      <button className={styles.button} onClick={() => setPage(-page + 1)}>
+        <div className={styles.buttonText}>
+          {'<<'}
+        </div>
       </button>
-      <button onClick={() => setPage(-1)}>
-        {'<'}
+      <button className={styles.button} onClick={() => setPage(-1)}>
+        <div className={styles.buttonText}>
+          {'<'}
+        </div>
       </button>
       <p>
         {page}
       </p>
-      <button onClick={() => setPage(1)}>
-        {'>'}
+      <button className={styles.button} onClick={() => setPage(1)}>
+        <div className={styles.buttonText}>
+          {'>'}
+        </div>
       </button>
-      <button onClick={() => setPage(maxPage - page)}>
-        {'>>'}
+      <button className={styles.button} onClick={() => setPage(maxPage - page)}>
+        <div className={styles.buttonText}>
+          {'>>'}
+        </div>
       </button>
     </div>
   );

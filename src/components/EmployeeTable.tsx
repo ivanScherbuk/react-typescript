@@ -1,5 +1,7 @@
 import React from 'react';
 import { IEmployee } from '../types/employee';
+import cn from 'classnames/bind';
+import styles from '../styles/EmployeeScreen.module.css';
 
 interface EmployeeTableProps {
   employees: IEmployee[],
@@ -40,8 +42,13 @@ const EmployeeTable: React.FC<EmployeeTableProps> = ({ employees, deleteEmployee
               <td>{employee.position}</td>
               <td>{getDate(employee.createdAt)}</td>
               <td>
-                <button onClick={() => deleteEmployee(employee.id)}>
-                  -
+                <button
+                  className={cn(styles.button, styles.buttonDelete)}
+                  onClick={() => deleteEmployee(employee.id)}
+                >
+                  <div className={styles.buttonText}>
+                    -
+                  </div>
                 </button>
               </td>
             </tr>

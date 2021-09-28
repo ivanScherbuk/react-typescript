@@ -6,6 +6,8 @@ import ModalInput from '../components/ModalInput';
 import { Employee, EmployeeParams } from '../types/employee';
 import Pagination from '../components/Pagination';
 import { useHistory, useParams } from 'react-router';
+import { NavLink } from 'react-router-dom';
+import styles from '../styles/EmployeeScreen.module.css';
 
 const EmployeeScreen: React.FC = () => {
   const [ maxPage, setMaxPage ] = useState<number>(0);
@@ -19,27 +21,28 @@ const EmployeeScreen: React.FC = () => {
 
   useEffect(() => {
     getEmployeesNumber();
-    fetchEmployees(employeesPage, limit);
   }, []);
 
   useEffect(() => {
     setEmployeesPage(Number(page));
     fetchEmployees(Number(page), limit);
-  }, [page]);
+  }, [page, limit]);
 
   useEffect(() => {
     setMaxPage(Math.ceil(employeesNumber / limit));
+    fetchEmployees(employeesPage, limit);
   }, [employeesNumber, limit]);
 
   const deleteEmployee = async (id: string) => {
     let newPage = employeesPage;
     if (employees.length === 1 && employeesPage > 1) {
       newPage = employeesPage - 1;
-      deleteEmployeeAC(id, newPage, limit);
+    }
+    await deleteEmployeeAC(id, newPage, limit);
+    getEmployeesNumber();
+    if (newPage !== employeesPage) {
       history.push(`${newPage}`);
     }
-    await deleteEmployeeAC(id, employeesPage, limit);
-    getEmployeesNumber();
   }
 
   const setPage = (pageDif: number) => {
@@ -82,8 +85,15 @@ const EmployeeScreen: React.FC = () => {
       {isShowModal &&
         <ModalInput closeModal={() => setIsShowModal(false)} addEmployee={addEmployee} />
       }
-      <button onClick={() => setIsShowModal(true)}>
-        Add Employee
+      <NavLink className={styles.button} to='/'>
+        <div className={styles.buttonText}>
+        Back to Menu
+        </div>
+      </NavLink>
+      <button className={styles.button} onClick={() => setIsShowModal(true)}>
+        <div className={styles.buttonText}>
+          Add Employee
+        </div>
       </button>
     </div>
   )
