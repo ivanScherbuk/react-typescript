@@ -17,6 +17,21 @@ export const fetchEmployees = (page: number, limit: number) => {
   }
 }
 
+export const fetchLastEmployees = () => { 
+  return async (dispatch: Dispatch<EmployeeAction>) => {
+    try {
+      dispatch({ type: EmployeeActionTypes.SET_LOADING });
+      const response = await axios.get<IEmployee[]>(`http://localhost:5000/employees/last`);
+      dispatch({ type: EmployeeActionTypes.FETCH_EMPLOYEES_SUCCESS, payload: response.data });
+    } catch (error) {
+      dispatch({
+        type: EmployeeActionTypes.FETCH_EMPLOYEES_ERROR,
+        payload: 'Ooops, something went wrong...',
+      })
+    }
+  }
+}
+
 export const getEmployeesNumber = () => { 
   return async (dispatch: Dispatch<EmployeeAction>) => {
     try {

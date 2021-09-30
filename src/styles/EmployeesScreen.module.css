@@ -25,3 +25,9 @@
   font-size: 14px;
   text-decoration: none;
 }
+
+.buttons {
+  display: flex;
+  justify-content: space-between;
+  width: 620px;
+}

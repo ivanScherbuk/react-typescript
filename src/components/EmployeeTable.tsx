@@ -1,14 +1,15 @@
 import React from 'react';
 import { IEmployee } from '../types/employee';
 import cn from 'classnames/bind';
-import styles from '../styles/EmployeeScreen.module.css';
+import styles from '../styles/EmployeesScreen.module.css';
 
 interface EmployeeTableProps {
   employees: IEmployee[],
-  deleteEmployee: (str: string) => void,
+  deleteEmployee?: (str: string) => void,
+  lastEmployees?: boolean,
 }
 
-const EmployeeTable: React.FC<EmployeeTableProps> = ({ employees, deleteEmployee }) => {
+const EmployeeTable: React.FC<EmployeeTableProps> = ({ employees, deleteEmployee, lastEmployees }) => {
   function getDate (date: string) {
     const newDate = new Date(date);
     const day = newDate.getDate() + 1;
@@ -28,7 +29,7 @@ const EmployeeTable: React.FC<EmployeeTableProps> = ({ employees, deleteEmployee
           <th>Department</th>
           <th>Position</th>
           <th>Employment Date</th>
-          <th>Delete</th>
+          {!lastEmployees && <th>Delete</th>}
         </tr>
       </thead>
       <tbody>
@@ -41,16 +42,17 @@ const EmployeeTable: React.FC<EmployeeTableProps> = ({ employees, deleteEmployee
               <td>{employee.department}</td>
               <td>{employee.position}</td>
               <td>{getDate(employee.createdAt)}</td>
-              <td>
-                <button
-                  className={cn(styles.button, styles.buttonDelete)}
-                  onClick={() => deleteEmployee(employee.id)}
-                >
-                  <div className={styles.buttonText}>
-                    -
-                  </div>
-                </button>
-              </td>
+              {!lastEmployees &&
+                <td>
+                  <button
+                    className={cn(styles.button, styles.buttonDelete)}
+                    onClick={() => deleteEmployee && deleteEmployee(employee.id)}
+                  >
+                    <div className={styles.buttonText}>
+                      -
+                    </div>
+                  </button>
+                </td>}
             </tr>
         )})}
       </tbody>

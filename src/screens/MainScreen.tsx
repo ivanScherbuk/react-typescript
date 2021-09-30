@@ -10,11 +10,11 @@ const MainScreen: React.FC = () => {
           Employees
         </div>
       </NavLink>
-      <NavLink className={styles.button} to='/departments'>
+      {/* <NavLink className={styles.button} to='/departments'>
         <div className={styles.buttonText}>
           Departments
         </div>
-      </NavLink>
+      </NavLink> */}
     </div>
   )
 }

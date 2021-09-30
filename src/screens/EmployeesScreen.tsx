@@ -7,9 +7,9 @@ import { Employee, EmployeeParams } from '../types/employee';
 import Pagination from '../components/Pagination';
 import { useHistory, useParams } from 'react-router';
 import { NavLink } from 'react-router-dom';
-import styles from '../styles/EmployeeScreen.module.css';
+import styles from '../styles/EmployeesScreen.module.css';
 
-const EmployeeScreen: React.FC = () => {
+const EmployeesScreen: React.FC = () => {
   const [ maxPage, setMaxPage ] = useState<number>(0);
   const { employees, error, loading, employeesPage, limit, employeesNumber } = useTypedSelector(state => state.employee);
   const { fetchEmployees, deleteEmployeeAC, addEmployeeAC, getEmployeesNumber, setEmployeesPage } = useActions();
@@ -85,18 +85,25 @@ const EmployeeScreen: React.FC = () => {
       {isShowModal &&
         <ModalInput closeModal={() => setIsShowModal(false)} addEmployee={addEmployee} />
       }
-      <NavLink className={styles.button} to='/'>
-        <div className={styles.buttonText}>
-        Back to Menu
-        </div>
-      </NavLink>
-      <button className={styles.button} onClick={() => setIsShowModal(true)}>
-        <div className={styles.buttonText}>
-          Add Employee
-        </div>
-      </button>
+      <div className={styles.buttons}>
+        <NavLink className={styles.button} to='/'>
+          <div className={styles.buttonText}>
+            Back to Menu
+          </div>
+        </NavLink>
+        <NavLink className={styles.button} to='/employees/last'>
+          <div className={styles.buttonText}>
+            Last 5 Employees
+          </div>
+        </NavLink>
+        <button className={styles.button} onClick={() => setIsShowModal(true)}>
+          <div className={styles.buttonText}>
+            Add Employee
+          </div>
+        </button>
+      </div>
     </div>
   )
 }
 
-export default EmployeeScreen;
+export default EmployeesScreen;
