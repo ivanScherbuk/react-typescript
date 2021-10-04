@@ -81,6 +81,21 @@ export const addEmployeeAC = (employee: Employee) => {
   }
 }
 
+export const setEmployee = (id: string) => { 
+  return async (dispatch: Dispatch<EmployeeAction>) => {
+    try {
+      dispatch({ type: EmployeeActionTypes.SET_LOADING });
+      const response = await axios.get<IEmployee>(`http://localhost:5000/employees/id/${id}`);
+      dispatch({ type: EmployeeActionTypes.SET_EMPLOYEE, payload: response.data });
+    } catch (error) {
+      dispatch({
+        type: EmployeeActionTypes.FETCH_EMPLOYEES_ERROR,
+        payload: 'Ooops, something went wrong...',
+      })
+    }
+  }
+}
+
 export const setEmployeesPage = (page: number) => { 
   return { type: EmployeeActionTypes.SET_EMPLOYEES_PAGE, payload: page };
 }

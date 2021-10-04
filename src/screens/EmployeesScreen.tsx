@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useActions } from '../hooks/useActions';
 import { useTypedSelector } from '../hooks/useTypedSelector';
-import EmployeeTable from '../components/EmployeeTable';
+import EmployeesTable from '../components/EmployeesTable';
 import ModalInput from '../components/ModalInput';
 import { Employee, EmployeeParams } from '../types/employee';
 import Pagination from '../components/Pagination';
@@ -72,7 +72,7 @@ const EmployeesScreen: React.FC = () => {
 
   return (
     <div>
-      <EmployeeTable
+      <EmployeesTable
         employees={employees}
         deleteEmployee={deleteEmployee}
       />

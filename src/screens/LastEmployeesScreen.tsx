@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useTypedSelector } from '../hooks/useTypedSelector';
-import EmployeeTable from '../components/EmployeeTable';
+import EmployeesTable from '../components/EmployeesTable';
 import { useActions } from '../hooks/useActions';
 import { NavLink } from 'react-router-dom';
 import styles from '../styles/EmployeesScreen.module.css';
@@ -23,7 +23,7 @@ const LastEmployeesScreen: React.FC = () => {
 
   return (
     <div>
-      <EmployeeTable
+      <EmployeesTable
         employees={employees}
         lastEmployees
       />

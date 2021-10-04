@@ -15,6 +15,7 @@ export interface EmployeeState {
   employeesPage: number;
   limit: number;
   employeesNumber: number;
+  employee: IEmployee | null;
 }
 
 export interface Employee {
@@ -27,6 +28,7 @@ export interface Employee {
 
 export interface EmployeeParams {
   page: string;
+  id: string;
 }
 
 export enum EmployeeActionTypes {
@@ -37,6 +39,7 @@ export enum EmployeeActionTypes {
   FETCH_EMPLOYEES_SUCCESS = 'FETCH_EMPLOYEES_SUCCESS',
   FETCH_EMPLOYEES_ERROR = 'FETCH_EMPLOYEES_ERROR',
   SET_EMPLOYEES_PAGE = 'SET_EMPLOYEES_PAGE',
+  SET_EMPLOYEE = 'SET_EMPLOYEE',
 }
 
 interface SetLoadingAction {
@@ -72,4 +75,9 @@ interface SetEmployeesPageAction {
   payload: number;
 }
 
-export type EmployeeAction = SetLoadingAction | RemoveLoadingAction | AddEmployeeAction | SetEmployeesNumber | FetchEmployeesSuccessAction | FetchEmployeesErrorAction | SetEmployeesPageAction;
+interface SetEmployeeAction {
+  type: EmployeeActionTypes.SET_EMPLOYEE;
+  payload: IEmployee;
+}
+
+export type EmployeeAction = SetLoadingAction | RemoveLoadingAction | AddEmployeeAction | SetEmployeesNumber | FetchEmployeesSuccessAction | FetchEmployeesErrorAction | SetEmployeesPageAction | SetEmployeeAction;
