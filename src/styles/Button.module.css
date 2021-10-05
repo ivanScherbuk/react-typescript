@@ -19,6 +19,13 @@
   margin-top: 0px;
 }
 
+.buttonPagination {
+  width: 40px;
+  height: 40px;
+  border-radius: 100px;
+  margin-top: 0px;
+}
+
 .buttonText {
   color: white;
   font-weight: 700;
@@ -29,5 +36,5 @@
 .buttons {
   display: flex;
   justify-content: space-between;
-  width: 620px;
+  width: 777px;
 }

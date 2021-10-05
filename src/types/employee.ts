@@ -39,6 +39,7 @@ export enum EmployeeActionTypes {
   FETCH_EMPLOYEES_SUCCESS = 'FETCH_EMPLOYEES_SUCCESS',
   FETCH_EMPLOYEES_ERROR = 'FETCH_EMPLOYEES_ERROR',
   SET_EMPLOYEES_PAGE = 'SET_EMPLOYEES_PAGE',
+  SET_EMPLOYEES_LIMIT = 'SET_EMPLOYEES_LIMIT',
   SET_EMPLOYEE = 'SET_EMPLOYEE',
 }
 
@@ -75,9 +76,14 @@ interface SetEmployeesPageAction {
   payload: number;
 }
 
+interface SetEmployeesLimitAction {
+  type: EmployeeActionTypes.SET_EMPLOYEES_LIMIT;
+  payload: number;
+}
+
 interface SetEmployeeAction {
   type: EmployeeActionTypes.SET_EMPLOYEE;
   payload: IEmployee;
 }
 
-export type EmployeeAction = SetLoadingAction | RemoveLoadingAction | AddEmployeeAction | SetEmployeesNumber | FetchEmployeesSuccessAction | FetchEmployeesErrorAction | SetEmployeesPageAction | SetEmployeeAction;
+export type EmployeeAction = SetLoadingAction | RemoveLoadingAction | AddEmployeeAction | SetEmployeesNumber | FetchEmployeesSuccessAction | FetchEmployeesErrorAction | SetEmployeesPageAction | SetEmployeesLimitAction | SetEmployeeAction;

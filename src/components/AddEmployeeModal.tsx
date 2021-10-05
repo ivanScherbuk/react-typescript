@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
-import styles from '../styles/ModalInput.module.css';
+import styles from '../styles/AddEmployeeModal.module.css';
 import { Employee } from '../types/employee';
 
-interface ModalInputProps {
+interface AddEmployeeModalProps {
   closeModal: () => void,
   addEmployee: (employee: Employee) => void,
 }
 
-const ModalInput: React.FC<ModalInputProps> = ({ closeModal, addEmployee }) => {
+const AddEmployeeModal: React.FC<AddEmployeeModalProps> = ({ closeModal, addEmployee }) => {
   const [employee, setEmployee] = useState<Employee>({
     firstName: '',
     lastName: '',
@@ -87,4 +87,4 @@ const ModalInput: React.FC<ModalInputProps> = ({ closeModal, addEmployee }) => {
   );
 }
 
-export default ModalInput;
+export default AddEmployeeModal;

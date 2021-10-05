@@ -26,6 +26,8 @@ export const employeeReducer = (state = initialState, action: EmployeeAction): E
       return { ...state, loading: false, error: action.payload };
     case EmployeeActionTypes.SET_EMPLOYEES_PAGE: 
       return { ...state, employeesPage: action.payload };
+    case EmployeeActionTypes.SET_EMPLOYEES_LIMIT: 
+      return { ...state, limit: action.payload };
     case EmployeeActionTypes.SET_EMPLOYEE: 
       return { ...state, loading: false, employee: action.payload };
     default: 

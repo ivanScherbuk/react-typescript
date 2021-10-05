@@ -2,18 +2,20 @@ import React, { useEffect, useState } from 'react';
 import { useActions } from '../hooks/useActions';
 import { useTypedSelector } from '../hooks/useTypedSelector';
 import EmployeesTable from '../components/EmployeesTable';
-import ModalInput from '../components/ModalInput';
 import { Employee, EmployeeParams } from '../types/employee';
 import Pagination from '../components/Pagination';
 import { useHistory, useParams } from 'react-router';
 import { NavLink } from 'react-router-dom';
-import styles from '../styles/EmployeesScreen.module.css';
+import styles from '../styles/Button.module.css';
+import AddEmployeeModal from '../components/AddEmployeeModal';
+import LimitModal from '../components/LimitModal';
 
 const EmployeesScreen: React.FC = () => {
   const [ maxPage, setMaxPage ] = useState<number>(0);
   const { employees, error, loading, employeesPage, limit, employeesNumber } = useTypedSelector(state => state.employee);
-  const { fetchEmployees, deleteEmployeeAC, addEmployeeAC, getEmployeesNumber, setEmployeesPage } = useActions();
-  const [ isShowModal, setIsShowModal ] = useState<boolean>(false);
+  const { fetchEmployees, deleteEmployeeAC, addEmployeeAC, getEmployeesNumber, setEmployeesPage, setEmployeesLimit } = useActions();
+  const [ isAddEmployeeShowModal, setIsAddEmployeeShowModal ] = useState<boolean>(false);
+  const [ isLimitShowModal, setIsLimitShowModal ] = useState<boolean>(false);
 
   const history = useHistory();
 
@@ -82,8 +84,11 @@ const EmployeesScreen: React.FC = () => {
         maxPage={maxPage}
         setPage={setPage}
       />
-      {isShowModal &&
-        <ModalInput closeModal={() => setIsShowModal(false)} addEmployee={addEmployee} />
+      {isAddEmployeeShowModal &&
+        <AddEmployeeModal closeModal={() => setIsAddEmployeeShowModal(false)} addEmployee={addEmployee} />
+      }
+      {isLimitShowModal &&
+        <LimitModal closeModal={() => setIsLimitShowModal(false)} setEmployeesLimit={setEmployeesLimit} />
       }
       <div className={styles.buttons}>
         <NavLink className={styles.button} to='/'>
@@ -96,9 +101,14 @@ const EmployeesScreen: React.FC = () => {
             Last 5 Employees
           </div>
         </NavLink>
-        <button className={styles.button} onClick={() => setIsShowModal(true)}>
+        <button className={styles.button} onClick={() => setIsAddEmployeeShowModal(true)}>
           <div className={styles.buttonText}>
             Add Employee
+          </div>
+        </button>
+        <button className={styles.button} onClick={() => setIsLimitShowModal(true)}>
+          <div className={styles.buttonText}>
+            Change Table Limit
           </div>
         </button>
       </div>

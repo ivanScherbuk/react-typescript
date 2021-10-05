@@ -2,12 +2,14 @@ import React, { useEffect } from 'react';
 import { useTypedSelector } from '../hooks/useTypedSelector';
 import EmployeesTable from '../components/EmployeesTable';
 import { useActions } from '../hooks/useActions';
-import { NavLink } from 'react-router-dom';
-import styles from '../styles/EmployeesScreen.module.css';
+import styles from '../styles/Button.module.css';
+import { useHistory } from 'react-router';
 
 const LastEmployeesScreen: React.FC = () => {
   const { employees, error, loading} = useTypedSelector(state => state.employee);
   const { fetchLastEmployees } = useActions();
+
+  const history = useHistory();
 
   useEffect(() => {
     fetchLastEmployees();
@@ -27,11 +29,11 @@ const LastEmployeesScreen: React.FC = () => {
         employees={employees}
         lastEmployees
       />
-      <NavLink className={styles.button} to='/employees/1'>
+      <button className={styles.button} onClick={() => history.goBack()}>
         <div className={styles.buttonText}>
           Back
         </div>
-      </NavLink>
+      </button>
     </div>
   );
 }

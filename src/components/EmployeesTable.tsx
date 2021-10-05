@@ -1,7 +1,7 @@
 import React from 'react';
 import { IEmployee } from '../types/employee';
 import cn from 'classnames/bind';
-import styles from '../styles/Table.module.css';
+import styles from '../styles/Button.module.css';
 import { NavLink } from 'react-router-dom';
 
 interface EmployeesTableProps {

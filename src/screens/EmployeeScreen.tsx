@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react';
 import { useActions } from '../hooks/useActions';
 import { useTypedSelector } from '../hooks/useTypedSelector';
-import { NavLink, useParams } from 'react-router-dom';
-import styles from '../styles/EmployeesScreen.module.css';
+import { NavLink, useParams, useHistory } from 'react-router-dom';
+import styles from '../styles/Button.module.css';
 import { EmployeeParams } from '../types/employee';
 
 const EmployeeScreen: React.FC = () => {
@@ -10,6 +10,8 @@ const EmployeeScreen: React.FC = () => {
   const { setEmployee } = useActions();
 
   const { id } = useParams<EmployeeParams>();
+
+  const history = useHistory();
 
   useEffect(() => {
     console.log(id);
@@ -58,11 +60,11 @@ const EmployeeScreen: React.FC = () => {
         </tr>
       </tbody>
     </table>
-      <NavLink className={styles.button} to='/employees/1'>
+      <button className={styles.button} onClick={() => history.goBack()}>
         <div className={styles.buttonText}>
           Back
         </div>
-      </NavLink>
+      </button>
     </div>
   )
 }

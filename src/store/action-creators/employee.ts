@@ -96,6 +96,10 @@ export const setEmployee = (id: string) => {
   }
 }
 
+export const setEmployeesLimit = (limit: number) => { 
+  return { type: EmployeeActionTypes.SET_EMPLOYEES_LIMIT, payload: limit };
+}
+
 export const setEmployeesPage = (page: number) => { 
   return { type: EmployeeActionTypes.SET_EMPLOYEES_PAGE, payload: page };
 }
