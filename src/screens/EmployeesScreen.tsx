@@ -111,6 +111,11 @@ const EmployeesScreen: React.FC = () => {
             Change Table Limit
           </div>
         </button>
+        <button className={styles.button}>
+          <div className={styles.buttonText}>
+            Sort
+          </div>
+        </button>
       </div>
     </div>
   )

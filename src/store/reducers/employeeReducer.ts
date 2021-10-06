@@ -1,11 +1,13 @@
 import { EmployeeAction, EmployeeActionTypes, EmployeeState } from '../../types/employee';
 
+const storageLimit = window.localStorage.getItem('employeesLimit');
+
 const initialState: EmployeeState = {
   employees: [],
   loading: false,
   error: null,
   employeesPage: 1,
-  limit: 10,
+  limit: storageLimit ? Number(storageLimit) : 10,
   employeesNumber: 0,
   employee: null,
 }

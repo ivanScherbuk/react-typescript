@@ -10,13 +10,17 @@ const LimitModal: React.FC<LimitModalProps> = ({ closeModal, setEmployeesLimit }
   const [limit, setLimit] = useState<string>();
 
   const onLimitChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setLimit(e.target.value)
+    setLimit(e.target.value);
   }
 
   const confirmLimit = () => {
     const limitNumber = Number(limit);
-    if (limitNumber > 0) {
+    if (limitNumber > 0 && limitNumber <= 10) {
+      window.localStorage.setItem('employeesLimit', String(limitNumber));
       setEmployeesLimit(limitNumber);
+      closeModal();
+    } else {
+      alert('Please, enter number between 1 and 10!');
     }
   }
 
@@ -35,7 +39,7 @@ const LimitModal: React.FC<LimitModalProps> = ({ closeModal, setEmployeesLimit }
             type="text"
           />
         </div>
-        <button className={styles.button} onClick={() => confirmLimit}>
+        <button className={styles.button} onClick={() => confirmLimit()}>
           Confirm
         </button>
       </div>
