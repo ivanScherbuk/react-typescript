@@ -12,8 +12,8 @@ import LimitModal from '../components/LimitModal';
 
 const EmployeesScreen: React.FC = () => {
   const [ maxPage, setMaxPage ] = useState<number>(0);
-  const { employees, error, loading, employeesPage, limit, employeesNumber } = useTypedSelector(state => state.employee);
-  const { fetchEmployees, deleteEmployeeAC, addEmployeeAC, getEmployeesNumber, setEmployeesPage, setEmployeesLimit } = useActions();
+  const { employees, error, loading, employeesPage, limit, employeesNumber, sortType } = useTypedSelector(state => state.employee);
+  const { fetchEmployees, deleteEmployeeAC, addEmployeeAC, getEmployeesNumber, setEmployeesPage, setEmployeesLimit, setSortedEmployees } = useActions();
   const [ isAddEmployeeShowModal, setIsAddEmployeeShowModal ] = useState<boolean>(false);
   const [ isLimitShowModal, setIsLimitShowModal ] = useState<boolean>(false);
 
@@ -26,13 +26,22 @@ const EmployeesScreen: React.FC = () => {
   }, []);
 
   useEffect(() => {
-    setEmployeesPage(Number(page));
-    fetchEmployees(Number(page), limit);
+    const pageNumber = Number(page);
+    setEmployeesPage(pageNumber);
+    if (sortType !== '') {
+      setSortedEmployees(sortType, pageNumber, limit);
+    } else {
+      fetchEmployees(pageNumber, limit);
+    }
   }, [page, limit]);
 
   useEffect(() => {
     setMaxPage(Math.ceil(employeesNumber / limit));
-    fetchEmployees(employeesPage, limit);
+    if (sortType !== '') {
+      setSortedEmployees(sortType, employeesPage, limit);
+    } else {
+      fetchEmployees(employeesPage, limit);
+    }
   }, [employeesNumber, limit]);
 
   const deleteEmployee = async (id: string) => {
@@ -62,6 +71,11 @@ const EmployeesScreen: React.FC = () => {
       await addEmployeeAC(employee);
       getEmployeesNumber();
     }
+  }
+
+  const sortEmployees = () => {
+    const newSortType = sortType === 'asc' ? 'desc' : 'asc';
+    setSortedEmployees(newSortType, employeesPage, limit);
   }
 
   if (loading) {
@@ -111,9 +125,9 @@ const EmployeesScreen: React.FC = () => {
             Change Table Limit
           </div>
         </button>
-        <button className={styles.button}>
+        <button className={styles.button} onClick={() => sortEmployees()}>
           <div className={styles.buttonText}>
-            Sort
+            Sort {sortType === 'asc' ? 'Z-A' : 'A-Z'}
           </div>
         </button>
       </div>

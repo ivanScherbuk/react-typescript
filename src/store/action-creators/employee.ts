@@ -96,6 +96,21 @@ export const setEmployee = (id: string) => {
   }
 }
 
+export const setSortedEmployees = (sortType: string, page: number, limit: number) => { 
+  return async (dispatch: Dispatch<EmployeeAction>) => {
+    try {
+      dispatch({ type: EmployeeActionTypes.SET_LOADING });
+      const response = await axios.get<IEmployee[]>(`http://localhost:5000/employees/sort/${sortType}?limit=${limit}&page=${page}`);
+      dispatch({ type: EmployeeActionTypes.SET_SORTED_EMPLOYEES, payload: response.data, sortType: sortType });
+    } catch (error) {
+      dispatch({
+        type: EmployeeActionTypes.FETCH_EMPLOYEES_ERROR,
+        payload: 'Ooops, something went wrong...',
+      })
+    }
+  }
+}
+
 export const setEmployeesLimit = (limit: number) => { 
   return { type: EmployeeActionTypes.SET_EMPLOYEES_LIMIT, payload: limit };
 }

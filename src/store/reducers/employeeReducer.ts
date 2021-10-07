@@ -10,6 +10,7 @@ const initialState: EmployeeState = {
   limit: storageLimit ? Number(storageLimit) : 10,
   employeesNumber: 0,
   employee: null,
+  sortType: '',
 }
 
 export const employeeReducer = (state = initialState, action: EmployeeAction): EmployeeState => {
@@ -32,6 +33,8 @@ export const employeeReducer = (state = initialState, action: EmployeeAction): E
       return { ...state, limit: action.payload };
     case EmployeeActionTypes.SET_EMPLOYEE: 
       return { ...state, loading: false, employee: action.payload };
+    case EmployeeActionTypes.SET_SORTED_EMPLOYEES: 
+      return { ...state, loading: false, sortType: action.sortType, employees: action.payload };
     default: 
       return state;
   }

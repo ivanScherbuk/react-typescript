@@ -16,6 +16,7 @@ export interface EmployeeState {
   limit: number;
   employeesNumber: number;
   employee: IEmployee | null;
+  sortType: string;
 }
 
 export interface Employee {
@@ -41,6 +42,7 @@ export enum EmployeeActionTypes {
   SET_EMPLOYEES_PAGE = 'SET_EMPLOYEES_PAGE',
   SET_EMPLOYEES_LIMIT = 'SET_EMPLOYEES_LIMIT',
   SET_EMPLOYEE = 'SET_EMPLOYEE',
+  SET_SORTED_EMPLOYEES = 'SET_SORTED_EMPLOYEES',
 }
 
 interface SetLoadingAction {
@@ -86,4 +88,10 @@ interface SetEmployeeAction {
   payload: IEmployee;
 }
 
-export type EmployeeAction = SetLoadingAction | RemoveLoadingAction | AddEmployeeAction | SetEmployeesNumber | FetchEmployeesSuccessAction | FetchEmployeesErrorAction | SetEmployeesPageAction | SetEmployeesLimitAction | SetEmployeeAction;
+interface SetSortedEmployeesAction {
+  type: EmployeeActionTypes.SET_SORTED_EMPLOYEES;
+  payload: IEmployee[];
+  sortType: string;
+}
+
+export type EmployeeAction = SetLoadingAction | RemoveLoadingAction | AddEmployeeAction | SetEmployeesNumber | FetchEmployeesSuccessAction | FetchEmployeesErrorAction | SetEmployeesPageAction | SetEmployeesLimitAction | SetEmployeeAction | SetSortedEmployeesAction;

@@ -14,7 +14,6 @@ const EmployeeScreen: React.FC = () => {
   const history = useHistory();
 
   useEffect(() => {
-    console.log(id);
     setEmployee(id);
   }, [id]);
 
