@@ -94,4 +94,14 @@ interface SetSortedEmployeesAction {
   sortType: string;
 }
 
-export type EmployeeAction = SetLoadingAction | RemoveLoadingAction | AddEmployeeAction | SetEmployeesNumber | FetchEmployeesSuccessAction | FetchEmployeesErrorAction | SetEmployeesPageAction | SetEmployeesLimitAction | SetEmployeeAction | SetSortedEmployeesAction;
+export type EmployeeAction =
+  SetLoadingAction |
+  RemoveLoadingAction |
+  AddEmployeeAction |
+  SetEmployeesNumber |
+  FetchEmployeesSuccessAction |
+  FetchEmployeesErrorAction |
+  SetEmployeesPageAction |
+  SetEmployeesLimitAction |
+  SetEmployeeAction |
+  SetSortedEmployeesAction;

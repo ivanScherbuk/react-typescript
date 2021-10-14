@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useActions } from '../hooks/useActions';
 import { useTypedSelector } from '../hooks/useTypedSelector';
-import { NavLink, useParams, useHistory } from 'react-router-dom';
+import { useParams, useHistory } from 'react-router-dom';
 import styles from '../styles/Button.module.css';
 import { EmployeeParams } from '../types/employee';
 

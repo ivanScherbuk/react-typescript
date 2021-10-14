@@ -3,21 +3,21 @@ import styles from '../styles/AddEmployeeModal.module.css';
 
 interface LimitModalProps {
   closeModal: () => void,
-  setEmployeesLimit: (limit: number) => void,
+  setLimit: (limit: number) => void,
 }
 
-const LimitModal: React.FC<LimitModalProps> = ({ closeModal, setEmployeesLimit }) => {
-  const [limit, setLimit] = useState<string>();
+const LimitModal: React.FC<LimitModalProps> = ({ closeModal, setLimit }) => {
+  const [limit, changeLimit] = useState<string>();
 
   const onLimitChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setLimit(e.target.value);
+    changeLimit(e.target.value);
   }
 
   const confirmLimit = () => {
     const limitNumber = Number(limit);
     if (limitNumber > 0 && limitNumber <= 10) {
       window.localStorage.setItem('employeesLimit', String(limitNumber));
-      setEmployeesLimit(limitNumber);
+      setLimit(limitNumber);
       closeModal();
     } else {
       alert('Please, enter number between 1 and 10!');

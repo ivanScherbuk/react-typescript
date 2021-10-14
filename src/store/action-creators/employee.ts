@@ -2,11 +2,13 @@ import { Employee, EmployeeAction, EmployeeActionTypes, IEmployee } from '../../
 import axios from "axios";
 import { Dispatch } from "redux";
 
+const initialPath = 'http://localhost:5000/employees';
+
 export const fetchEmployees = (page: number, limit: number) => { 
   return async (dispatch: Dispatch<EmployeeAction>) => {
     try {
       dispatch({ type: EmployeeActionTypes.SET_LOADING });
-      const response = await axios.get<IEmployee[]>(`http://localhost:5000/employees?limit=${limit}&page=${page}`);
+      const response = await axios.get<IEmployee[]>(`${initialPath}?limit=${limit}&page=${page}`);
       dispatch({ type: EmployeeActionTypes.FETCH_EMPLOYEES_SUCCESS, payload: response.data });
     } catch (error) {
       dispatch({
@@ -21,7 +23,7 @@ export const fetchLastEmployees = () => {
   return async (dispatch: Dispatch<EmployeeAction>) => {
     try {
       dispatch({ type: EmployeeActionTypes.SET_LOADING });
-      const response = await axios.get<IEmployee[]>(`http://localhost:5000/employees/last`);
+      const response = await axios.get<IEmployee[]>(`${initialPath}/last`);
       dispatch({ type: EmployeeActionTypes.FETCH_EMPLOYEES_SUCCESS, payload: response.data });
     } catch (error) {
       dispatch({
@@ -36,7 +38,7 @@ export const getEmployeesNumber = () => {
   return async (dispatch: Dispatch<EmployeeAction>) => {
     try {
       dispatch({ type: EmployeeActionTypes.SET_LOADING });
-      const response = await axios.get<number>(`http://localhost:5000/employees/number`);
+      const response = await axios.get<number>(`${initialPath}/number`);
       dispatch({ type: EmployeeActionTypes.SET_EMPLOYEES_NUMBER, payload: response.data });
     } catch (error) {
       dispatch({
@@ -47,11 +49,11 @@ export const getEmployeesNumber = () => {
   }
 }
 
-export const deleteEmployeeAC = (id: string, page: number, limit: number) => { 
+export const deleteEmployeeAC = (id: string) => { 
   return async (dispatch: Dispatch<EmployeeAction>) => {
     try {
       dispatch({ type: EmployeeActionTypes.SET_LOADING });
-      await axios.delete(`http://localhost:5000/employees/${id}`);
+      await axios.delete(`${initialPath}/${id}`);
       dispatch({ type: EmployeeActionTypes.REMOVE_LOADING });
     } catch (error) {
       dispatch({
@@ -68,7 +70,7 @@ export const addEmployeeAC = (employee: Employee) => {
       dispatch({ type: EmployeeActionTypes.SET_LOADING });
       await axios({
         method: 'post',
-        url: 'http://localhost:5000/employees',
+        url: initialPath,
         data: employee,
       });
       dispatch({ type: EmployeeActionTypes.REMOVE_LOADING });
@@ -85,7 +87,7 @@ export const setEmployee = (id: string) => {
   return async (dispatch: Dispatch<EmployeeAction>) => {
     try {
       dispatch({ type: EmployeeActionTypes.SET_LOADING });
-      const response = await axios.get<IEmployee>(`http://localhost:5000/employees/id/${id}`);
+      const response = await axios.get<IEmployee>(`${initialPath}/id/${id}`);
       dispatch({ type: EmployeeActionTypes.SET_EMPLOYEE, payload: response.data });
     } catch (error) {
       dispatch({
@@ -100,7 +102,7 @@ export const setSortedEmployees = (sortType: string, page: number, limit: number
   return async (dispatch: Dispatch<EmployeeAction>) => {
     try {
       dispatch({ type: EmployeeActionTypes.SET_LOADING });
-      const response = await axios.get<IEmployee[]>(`http://localhost:5000/employees/sort/${sortType}?limit=${limit}&page=${page}`);
+      const response = await axios.get<IEmployee[]>(`${initialPath}/sort/${sortType}?limit=${limit}&page=${page}`);
       dispatch({ type: EmployeeActionTypes.SET_SORTED_EMPLOYEES, payload: response.data, sortType: sortType });
     } catch (error) {
       dispatch({

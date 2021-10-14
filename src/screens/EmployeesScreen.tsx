@@ -49,7 +49,7 @@ const EmployeesScreen: React.FC = () => {
     if (employees.length === 1 && employeesPage > 1) {
       newPage = employeesPage - 1;
     }
-    await deleteEmployeeAC(id, newPage, limit);
+    await deleteEmployeeAC(id);
     getEmployeesNumber();
     if (newPage !== employeesPage) {
       history.push(`${newPage}`);
@@ -102,7 +102,7 @@ const EmployeesScreen: React.FC = () => {
         <AddEmployeeModal closeModal={() => setIsAddEmployeeShowModal(false)} addEmployee={addEmployee} />
       }
       {isLimitShowModal &&
-        <LimitModal closeModal={() => setIsLimitShowModal(false)} setEmployeesLimit={setEmployeesLimit} />
+        <LimitModal closeModal={() => setIsLimitShowModal(false)} setLimit={setEmployeesLimit} />
       }
       <div className={styles.buttons}>
         <NavLink className={styles.button} to='/'>
