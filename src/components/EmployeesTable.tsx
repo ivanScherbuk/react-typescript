@@ -1,7 +1,7 @@
 import React from 'react';
 import { IEmployee } from '../types/employee';
 import cn from 'classnames/bind';
-import styles from '../styles/Button.module.css';
+import styles from '../styles/Table.module.css';
 import { NavLink } from 'react-router-dom';
 
 interface EmployeesTableProps {
@@ -21,33 +21,31 @@ const EmployeesTable: React.FC<EmployeesTableProps> = ({ employees, deleteEmploy
   }
 
   return (
-    <table style={{ 'borderWidth':'1px', 'borderColor':'black', 'borderStyle':'solid', 'borderSpacing': '0' }}>
+    <table className={styles.table}>
       <thead>
         <tr>
-          <th style={thtdStyle}>First Name</th>
-          <th style={thtdStyle}>Last Name</th>
-          <th style={thtdStyle}>Company</th>
-          <th style={thtdStyle}>Department</th>
-          <th style={thtdStyle}>Position</th>
-          <th style={thtdStyle}>Employment Date</th>
-          {!lastEmployees && <th style={thtdStyle}>Delete</th>}
-          <th style={borderRight0}>Info</th>
+          <th className={styles.tableItem}>First Name</th>
+          <th className={styles.tableItem}>Last Name</th>
+          <th className={styles.tableItem}>Company</th>
+          <th className={styles.tableItem}>Department</th>
+          <th className={styles.tableItem}>Position</th>
+          <th className={styles.tableItem}>Employment Date</th>
+          {!lastEmployees && <th className={styles.tableItem}>Delete</th>}
+          <th className={cn(styles.tableItem, styles.borderRight)}>Info</th>
         </tr>
       </thead>
       <tbody>
         {employees?.map((employee, index) => {
           return (
             <tr key={employee.id}>
-              <td style={index !== employees.length - 1 ? thtdStyle : borderBottom0}>{employee.firstName}</td>
-              <td style={index !== employees.length - 1 ? thtdStyle : borderBottom0}>{employee.lastName}</td>
-              <td style={index !== employees.length - 1 ? thtdStyle : borderBottom0}>{employee.company}</td>
-              <td style={index !== employees.length - 1 ? thtdStyle : borderBottom0}>{employee.department}</td>
-              <td style={index !== employees.length - 1 ? thtdStyle : borderBottom0}>{employee.position}</td>
-              <td style={index !== employees.length - 1 ? thtdStyle : borderBottom0}>
-                {getDate(employee.createdAt)}
-              </td>
+              <td className={cn(styles.tableItem, index === employees.length - 1 && styles.borderBottom)}>{employee.firstName}</td>
+              <td className={cn(styles.tableItem, index === employees.length - 1 && styles.borderBottom)}>{employee.lastName}</td>
+              <td className={cn(styles.tableItem, index === employees.length - 1 && styles.borderBottom)}>{employee.company}</td>
+              <td className={cn(styles.tableItem, index === employees.length - 1 && styles.borderBottom)}>{employee.department}</td>
+              <td className={cn(styles.tableItem, index === employees.length - 1 && styles.borderBottom)}>{employee.position}</td>
+              <td className={cn(styles.tableItem, index === employees.length - 1 && styles.borderBottom)}>{getDate(employee.createdAt)}</td>
               {!lastEmployees &&
-                <td style={index !== employees.length - 1 ? thtdStyle : borderBottom0}>
+                <td className={cn(styles.tableItem, index === employees.length - 1 && styles.borderBottom)}>
                   <button
                     className={cn(styles.button, styles.buttonDelete)}
                     onClick={() => deleteEmployee && deleteEmployee(employee.id)}
@@ -57,7 +55,7 @@ const EmployeesTable: React.FC<EmployeesTableProps> = ({ employees, deleteEmploy
                     </div>
                   </button>
                 </td>}
-              <td style={index !== employees.length - 1 ? borderRight0 : borderRight0Bottom0}>
+              <td className={cn(styles.tableItem, styles.borderRight, index === employees.length - 1 && styles.borderBottom)}>
                 <NavLink className={cn(styles.button, styles.buttonDelete)} to={`/employees/id/${employee.id}`}>
                   <div className={styles.buttonText}>
                     +
@@ -70,10 +68,5 @@ const EmployeesTable: React.FC<EmployeesTableProps> = ({ employees, deleteEmploy
     </table>
   )
 }
-
-const thtdStyle = { 'padding': '0.5rem', 'borderBottom': '1px solid black', 'borderRight': '1px solid black' };
-const borderRight0 = { 'padding': '0.5rem', 'borderBottom': '1px solid black', 'borderRight': '0px solid black' };
-const borderBottom0 = { 'padding': '0.5rem', 'borderBottom': '0px solid black', 'borderRight': '1px solid black' };
-const borderRight0Bottom0 = { 'padding': '0.5rem', 'borderBottom': '0px solid black', 'borderRight': '0px solid black' };
 
 export default EmployeesTable;

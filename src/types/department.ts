@@ -1,8 +1,10 @@
+import { IEmployee } from "./employee";
+
 export interface IDepartment {
   id: string,
   name: string;
   employeesNumber: number;
-  Departments: Array<Object>;
+  employees: IEmployee[];
   createdAt: string;
 }
 

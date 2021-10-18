@@ -2,7 +2,8 @@ import React, { useEffect } from 'react';
 import { useActions } from '../hooks/useActions';
 import { useTypedSelector } from '../hooks/useTypedSelector';
 import { useParams, useHistory } from 'react-router-dom';
-import styles from '../styles/Button.module.css';
+import styles from '../styles/Table.module.css';
+import cn from 'classnames/bind';
 import { EmployeeParams } from '../types/employee';
 
 const DepartmentScreen: React.FC = () => {
@@ -27,26 +28,34 @@ const DepartmentScreen: React.FC = () => {
 
   return (
     <div>
-    <table style={{ 'borderWidth':'1px', 'borderColor':'black', 'borderStyle':'solid', 'borderSpacing': '0' }}>
-      <tbody>
-        <tr>
-          <th style={thtdStyle}>Id</th>
-          <td style={borderRight0}>{id}</td>
-        </tr>
-        <tr>
-          <th style={thtdStyle}>Department Name</th>
-          <td style={borderRight0}>{department?.name}</td>
-        </tr>
-        <tr>
-          <th style={thtdStyle}>Employees Number</th>
-          <td style={borderRight0}>{department?.employeesNumber}</td>
-        </tr>
-        <tr>
-          <th style={borderBottom0}>Employment Date</th>
-          <td style={borderRight0Bottom0}>{department?.createdAt}</td>
-        </tr>
-      </tbody>
-    </table>
+      <table className={styles.table}>
+        <tbody>
+          <tr>
+            <th className={styles.tableItem}>Id</th>
+            <td className={cn(styles.tableItem, styles.borderRight)}>{id}</td>
+          </tr>
+          <tr>
+            <th className={styles.tableItem}>Department Name</th>
+            <td className={cn(styles.tableItem, styles.borderRight)}>{department?.name}</td>
+          </tr>
+          <tr>
+            <th className={styles.tableItem}>Employees Number</th>
+            <td className={cn(styles.tableItem, styles.borderRight)}>{department?.employeesNumber}</td>
+          </tr>
+          <tr>
+            <th className={cn(styles.tableItem, styles.borderBottom)}>Employment Date</th>
+            <td className={cn(styles.tableItem, styles.borderBottom, styles.borderRight)}>{department?.createdAt}</td>
+          </tr>
+        </tbody>
+      </table>
+      <div>
+        Employees:
+        {department?.employees.map((employee) => 
+          <div>
+            {`${employee.firstName} ${employee.lastName}`}
+          </div>
+        )}
+      </div>
       <button className={styles.button} onClick={() => history.goBack()}>
         <div className={styles.buttonText}>
           Back
@@ -55,10 +64,5 @@ const DepartmentScreen: React.FC = () => {
     </div>
   )
 }
-
-const thtdStyle = { 'padding': '0.5rem', 'borderBottom': '1px solid black', 'borderRight': '1px solid black' };
-const borderRight0 = { 'padding': '0.5rem', 'borderBottom': '1px solid black', 'borderRight': '0px solid black' };
-const borderBottom0 = { 'padding': '0.5rem', 'borderBottom': '0px solid black', 'borderRight': '1px solid black' };
-const borderRight0Bottom0 = { 'padding': '0.5rem', 'borderBottom': '0px solid black', 'borderRight': '0px solid black' };
 
 export default DepartmentScreen;

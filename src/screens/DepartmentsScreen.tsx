@@ -56,7 +56,6 @@ const DepartmentsScreen: React.FC = () => {
   }
 
   const addDepartment = async (department: Department) => {
-    console.log(department.employeesNumber);
     if (!department.name) {
       alert('Please, fill in all fields!');
     } else if (department.employeesNumber > 0 && department.employeesNumber < 1000) {

@@ -1,6 +1,6 @@
 import React from 'react';
 import cn from 'classnames/bind';
-import styles from '../styles/Button.module.css';
+import styles from '../styles/Table.module.css';
 import { NavLink } from 'react-router-dom';
 import { IDepartment } from '../types/department';
 
@@ -21,27 +21,25 @@ const DepartmentsTable: React.FC<DepartmentsTableProps> = ({ departments, delete
   }
 
   return (
-    <table style={{ 'borderWidth':'1px', 'borderColor':'black', 'borderStyle':'solid', 'borderSpacing': '0' }}>
+    <table className={styles.table}>
       <thead>
         <tr>
-          <th style={thtdStyle}>Department Name</th>
-          <th style={thtdStyle}>Employees Number</th>
-          <th style={thtdStyle}>Foundation Date</th>
-          {!topDepartments && <th style={thtdStyle}>Delete</th>}
-          <th style={borderRight0}>Info</th>
+          <th className={styles.tableItem}>Department Name</th>
+          <th className={styles.tableItem}>Employees Number</th>
+          <th className={styles.tableItem}>Foundation Date</th>
+          {!topDepartments && <th className={styles.tableItem}>Delete</th>}
+          <th className={cn(styles.tableItem, styles.borderRight)}>Info</th>
         </tr>
       </thead>
       <tbody>
         {departments?.map((department, index) => {
           return (
             <tr key={department.id}>
-              <td style={index !== departments.length - 1 ? thtdStyle : borderBottom0}>{department.name}</td>
-              <td style={index !== departments.length - 1 ? thtdStyle : borderBottom0}>{department.employeesNumber}</td>
-              <td style={index !== departments.length - 1 ? thtdStyle : borderBottom0}>
-                {getDate(department.createdAt)}
-              </td>
+              <td className={cn(styles.tableItem, index === departments.length - 1 && styles.borderBottom)}>{department.name}</td>
+              <td className={cn(styles.tableItem, index === departments.length - 1 && styles.borderBottom)}>{department.employeesNumber}</td>
+              <td className={cn(styles.tableItem, index === departments.length - 1 && styles.borderBottom)}>{getDate(department.createdAt)}</td>
               {!topDepartments &&
-                <td style={index !== departments.length - 1 ? thtdStyle : borderBottom0}>
+                <td className={cn(styles.tableItem, index === departments.length - 1 && styles.borderBottom)}>
                   <button
                     className={cn(styles.button, styles.buttonDelete)}
                     onClick={() => deleteDepartment && deleteDepartment(department.id)}
@@ -51,7 +49,7 @@ const DepartmentsTable: React.FC<DepartmentsTableProps> = ({ departments, delete
                     </div>
                   </button>
                 </td>}
-              <td style={index !== departments.length - 1 ? borderRight0 : borderRight0Bottom0}>
+              <td className={cn(styles.tableItem, styles.borderRight, index === departments.length - 1 && styles.borderBottom)}>
                 <NavLink className={cn(styles.button, styles.buttonDelete)} to={`/departments/id/${department.id}`}>
                   <div className={styles.buttonText}>
                     +
@@ -64,10 +62,5 @@ const DepartmentsTable: React.FC<DepartmentsTableProps> = ({ departments, delete
     </table>
   )
 }
-
-const thtdStyle = { 'padding': '0.5rem', 'borderBottom': '1px solid black', 'borderRight': '1px solid black' };
-const borderRight0 = { 'padding': '0.5rem', 'borderBottom': '1px solid black', 'borderRight': '0px solid black' };
-const borderBottom0 = { 'padding': '0.5rem', 'borderBottom': '0px solid black', 'borderRight': '1px solid black' };
-const borderRight0Bottom0 = { 'padding': '0.5rem', 'borderBottom': '0px solid black', 'borderRight': '0px solid black' };
 
 export default DepartmentsTable;

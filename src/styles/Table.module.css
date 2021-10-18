@@ -1,0 +1,59 @@
+.button {
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  cursor: pointer;
+  text-decoration: none;
+  width: 150px;
+  height: 40px;
+  border-radius: 10px;
+  background-color: black;
+  margin-top: 20px;
+  border: none;
+}
+
+.buttonDelete {
+  width: 20px;
+  height: 20px;
+  border-radius: 100px;
+  margin-top: 0px;
+}
+
+.buttonPagination {
+  width: 40px;
+  height: 40px;
+  border-radius: 100px;
+  margin-top: 0px;
+}
+
+.buttonText {
+  color: white;
+  font-weight: 700;
+  font-size: 14px;
+  text-decoration: none;
+}
+
+.buttons {
+  display: flex;
+  justify-content: space-between;
+  width: 777px;
+}
+
+.table {
+  border: 1px solid black;
+  border-spacing: 0;
+}
+
+.tableItem {
+  padding: 0.5rem;
+  border-bottom: 1px solid black;
+  border-right: 1px solid black;
+}
+
+.borderBottom {
+  border-bottom: 0px;
+}
+
+.borderRight {
+  border-right: 0px;
+}
